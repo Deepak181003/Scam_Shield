@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07111f">
+  <title>{% block title %}ScamShield{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="/">
+        <span class="brand-icon">✓</span>
+        <span><strong>ScamShield</strong><small>Detect. Understand. Stay Safe.</small></span>
+      </a>
+      <nav class="side-nav" aria-label="Main navigation">
+        <a href="/" class="nav-item {% if active_page=='home' %}active{% endif %}"><span>⌂</span>Home</a>
+        <a href="/history" class="nav-item {% if active_page=='history' %}active{% endif %}"><span>◷</span>History</a>
+        <a href="/analytics" class="nav-item {% if active_page=='analytics' %}active{% endif %}"><span>▥</span>Analytics</a>
+        <a href="/guide" class="nav-item {% if active_page=='guide' %}active{% endif %}"><span>◈</span>Safety Guide</a>
+        <a href="/about" class="nav-item {% if active_page=='about' %}active{% endif %}"><span>ⓘ</span>About</a>
+      </nav>
+
+      <div class="sidebar-footer"><b>ScamShield</b><span>v1.0.0</span><p>A safer digital world starts with awareness.</p></div>
+    </aside>
+
+    <div class="main-area">
+      <header class="topbar">
+        <button class="icon-btn mobile-menu" id="menuBtn" aria-label="Open menu">☰</button>
+        <div class="breadcrumb">ScamShield <span>/</span> {{ page_name|default('Dashboard') }}</div>
+        <div class="top-actions">
+          <button class="icon-btn" id="themeBtn" title="Toggle theme">☾</button>
+          <button class="avatar">U</button>
+        </div>
+      </header>
+
+      <main class="page-content">
+        {% block content %}{% endblock %}
+      </main>
+    </div>
+  </div>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
